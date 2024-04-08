@@ -22,7 +22,7 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -70,9 +70,12 @@ afterEvaluate {
 
 dependencies {
 
-    compileOnly(libs.androidx.core.ktx)
-    compileOnly(libs.androidx.appcompat)
+//    compileOnly(libs.androidx.core.ktx)
+//    compileOnly(libs.androidx.appcompat)
+    compileOnly (libs.androidx.viewpager2)
     testImplementation(libs.junit)
+    api ("com.github.NeWolf:WolfLog:V1.0.0")
+//    api ("com.github.NeWolf:BaseRecycleViewAdapterHelper:V1.2.0")
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }
