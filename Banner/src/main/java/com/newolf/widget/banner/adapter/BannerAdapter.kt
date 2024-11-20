@@ -94,7 +94,8 @@ abstract class BannerAdapter<T>(@LayoutRes val layoutResId: Int) :
     fun setNewInstance(bannerList: MutableList<T>) {
         data.clear()
         data.addAll(bannerList)
-        notifyItemRangeChanged(0, bannerList.size)
+        notifyDataSetChanged()
+//        notifyItemRangeChanged(0, bannerList.size)
     }
 
 

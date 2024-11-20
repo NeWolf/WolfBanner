@@ -434,7 +434,7 @@ class Banner<T, BA : BannerAdapter<T>?> @JvmOverloads constructor(
         stop()
     }
 
-    internal inner class BannerOnPageChangeCallback : OnPageChangeCallback() {
+    inner class BannerOnPageChangeCallback : OnPageChangeCallback() {
         private var mTempPosition = INVALID_VALUE
         private var isScrolled = false
         override fun onPageScrolled(
@@ -458,12 +458,14 @@ class Banner<T, BA : BannerAdapter<T>?> @JvmOverloads constructor(
             if (isScrolled) {
                 mTempPosition = position
                 val realPosition = getRealPosition(isInfiniteLoop, position, realCount)
+                LogUtils.dTag(TAG, "onPageSelected: position = $position , realPosition = $realPosition , realCount = $realCount", )
                 mOnPageChangeListener?.onPageSelected(realPosition)
                 indicator?.onPageSelected(realPosition)
             }
         }
 
         override fun onPageScrollStateChanged(state: Int) {
+            LogUtils.dTag(TAG, "onPageScrollStateChanged: state = $state , mTempPosition = $mTempPosition" )
             //手势滑动中,代码执行滑动中
             if (state == ViewPager2.SCROLL_STATE_DRAGGING || state == ViewPager2.SCROLL_STATE_SETTLING) {
                 isScrolled = true
@@ -510,6 +512,7 @@ class Banner<T, BA : BannerAdapter<T>?> @JvmOverloads constructor(
                 if (itemCount <= 1) {
                     stop()
                 } else {
+                    setCurrentItem(startPosition, false)
                     start()
                 }
                 setIndicatorPageChange()
